@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 声明包 -->
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="myPackage"  extends="struts-default">
+		<!-- 登录 -->
+		<action name="login" class="login">
+			<result name="success">/index.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<!-- 退出登录 -->
+		<action name="quit" class="login" method="quit">
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 注册 -->
+		<action name="register" class="register">
+			<result name="success">/index.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+		<!-- 用户由前台进入后台 -->
+		<action name="enterBackstage" class="enterbackstage">
+			<result name="admin" type="redirect">admin_user.action?pageNumber=1</result>
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 管理员中心 -->
+		<action name="admin" class="admin">
+			<result name="success">/admin.jsp</result>
+			<result name="input">/admin.jsp</result>
+		</action>
+			<!-- 以列表的形式展示user -->
+		<action name="admin_user" class="admin" method="userManager">
+			<result name="success">/admin.jsp?pageNumber=${pageNumber}</result>
+			<result name="input">/admin.jsp?pageNumber=${pageNumber}</result>
+		</action>
+		
+		<action name="delUser" class="admin" method="delUser">
+			<result name="success" type="redirect">admin_user.action</result>
+			<result name="input" type="redirect">admin_user.action</result>
+		</action>
+		<!-- 管理员中心-题目管理 -->
+		<action name="saveTitle" class="admin" method="saveTitle">
+			<result name="success" type="redirect">admin_title.action?pageNumber=1</result>
+			<result name="input" type="redirect">admin_title.action?pageNumber=1</result>
+		</action>
+			<!-- 以列表的形式展示title -->
+		<action name="admin_title" class="admin" method="titleManager">
+			<result name="success" type="redirect">/admin.action?a_key=4&amp;pageNumber=${pageNumber}</result>
+			<result name="input" type="redirect">/admin.action?a_key=4&amp;pageNumber=${pageNumber}</result>
+		</action>
+			<!-- 修改title -->
+		<!-- 修改title -->
+		<action name="alterTitle" class="admin" method="alterTitle">
+			<result name="success" type="redirect">admin_title.action?pageNumber=${pageNumber}</result>
+			<result name="input" type="redirect">admin_title.action?pageNumber=${pageNumber}</result>
+		</action>
+		<action name="delTitle" class="admin" method="delTitle">
+			<result name="success" type="redirect">admin_title.action?pageNumber=${pageNumber}</result>
+			<result name="input" type="redirect">admin_title.action?pageNumber=${pageNumber}</result>
+		</action>
+		<!-- 管理员中心-公告管理 -->
+		<action name="saveBbs" class="admin" method="saveBbs">
+			<result name="success" type="redirect">admin_bbs.action?pageNumber=1</result>
+			<result name="input" type="redirect">admin_bbs.action?pageNumber=1</result>
+		</action>
+			<!-- 以列表的形式展示title -->
+		<action name="admin_bbs" class="admin" method="bbsManager">
+			<result name="success" type="redirect">/admin.action?a_key=5&amp;pageNumber=${pageNumber}</result>
+			<result name="input" type="redirect">/admin.action?a_key=5&amp;pageNumber=${pageNumber}</result>
+		</action>
+		<action name="delBbs" class="admin" method="delBbs">
+			<result name="success" type="redirect">admin_bbs.action?pageNumber=${pageNumber}</result>
+			<result name="input" type="redirect">admin_bbs.action?pageNumber=${pageNumber}</result>
+		</action>
+		<!-- 前台 -->
+		<!-- 行测试题 -->
+		<action name="xingce" class="xingce">
+			<result name="success">/xingceTest.jsp</result>
+			<result name="input">/xingceTest.jsp</result>
+		</action>
+		<action name="xingceExam" class="xingce" method="xingceExam">
+			<result name="success">/xingceExam.jsp</result>
+			<result name="input">/xingceExam.jsp</result>
+		</action>
+		<action name="allXingceExam" class="xingce" method="allXingceExam">
+			<result name="success">/xingceLianxi.jsp</result>
+			<result name="input">/xingceLianxi.jsp</result>
+		</action>
+		<action name="getAnswer" class="xingce" method="getAnswer">
+			<result name="success" type="redirect">myError.action</result>
+			<result name="input" type="redirect">myError.action</result>
+		</action>
+		<!-- 申论 -->
+		<action name="allShenlunTest" class="xingce" method="allShenlunTest">
+			<result name="success">/shenlunTest.jsp</result>
+			<result name="input">/shenlunTest.jsp</result>
+		</action>
+		<action name="shenlunExam" class="xingce" method="shenlunExam">
+			<result name="success">/shenlunExam.jsp</result>
+			<result name="input">/shenlunExam.jsp</result>
+		</action>
+		<!-- 首页 -->
+		<action name="user" class="user">
+			<result name="success">/userCentre.jsp</result>
+			<result name="input">/userCentre.jsp</result>
+		</action>
+		<!-- 用户 -->
+		<action name="myError" class="user" method="myError">
+			<result name="success" type="redirect">user.action?a_key=2</result>
+			<result name="input" type="redirect">user.action?a_key=2</result>
+		</action>
+	    <action name="alterPas" class="user" method="alterPas">
+	    	<result name="success" type="redirect">user.action?a_key=5</result>
+			<result name="input" type="redirect">user.action?a_key=5</result>
+	    </action> 
+	    <action name="myHistory" class="user" method="myHistory">
+	    	<result name="success" type="redirect">user.action?a_key=1</result>
+			<result name="input" type="redirect">user.action?a_key=1</result>
+	    </action>
+		<!-- 文件上传 -->
+		<action name="myUploadFile" class="upload">
+	        <result name="success" type="redirect">user.action?a_key=4</result>  
+	        <result name="input" type="redirect">user.action?a_key=4</result>  
+	    </action> 
+	</package>
+</struts>

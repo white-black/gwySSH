@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-5 2:54:23 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.gwytest.entity.TbUsertitle" table="TB_USERTITLE" schema="SCOTT">
+        <id name="usertitleid" type="int">
+            <column name="USERTITLEID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbusertitle_id_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbTitle" class="com.gwytest.entity.TbTitle" fetch="select">
+            <column name="TITLEID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbUser" class="com.gwytest.entity.TbUser" fetch="select">
+            <column name="USERID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="flag1" type="int" not-null="false">
+            <column name="FLAG1" precision="22" scale="0"></column>
+        </property>
+        <property name="flag2" type="int" not-null="false">
+            <column name="FLAG2" precision="22" scale="0"></column>
+        </property>
+        <property name="flag3" type="int" not-null="false">
+            <column name="FLAG3" precision="22" scale="0"></column>
+        </property>
+    </class>
+</hibernate-mapping>

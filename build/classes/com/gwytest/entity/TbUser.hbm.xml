@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-5 2:54:23 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.gwytest.entity.TbUser" table="TB_USER" schema="SCOTT">
+        <id name="userid" type="int">
+            <column name="USERID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbuser_id_seq</param>
+	       </generator>
+        </id>
+        <property name="username" type="string">
+            <column name="USERNAME" length="16" not-null="true" />
+        </property>
+        <property name="userpassword" type="string">
+            <column name="USERPASSWORD" length="16" not-null="true" />
+        </property>
+        <property name="usertype" type="int">
+            <column name="USERTYPE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="publishtime" type="date" update="false">
+            <column name="PUBLISHTIME" length="7" not-null="true" />
+        </property>
+        <property name="question" type="string">
+            <column name="QUESTION" length="30" />
+        </property>
+        <property name="answer" type="string">
+            <column name="ANSWER" length="30" />
+        </property>
+        <property name="logincount" type="int">
+            <column name="LOGINCOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="tbComments" table="TB_COMMENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USERID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.gwytest.entity.TbComment" />
+        </set>
+        <set name="tbBbses" table="TB_BBS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BBSUSER" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.gwytest.entity.TbBbs" />
+        </set>
+        <set name="tbUsertitles" table="TB_USERTITLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USERID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.gwytest.entity.TbUsertitle" />
+        </set>
+    </class>
+</hibernate-mapping>

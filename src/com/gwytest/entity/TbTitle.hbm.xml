@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-5 2:26:38 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.gwytest.entity.TbTitle" table="TB_TITLE" schema="SCOTT">
+        <id name="titleid" type="int">
+            <column name="TITLEID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbtitle_id_seq</param>
+	       </generator>
+        </id>
+        <property name="rightselect" type="string">
+            <column name="RIGHTSELECT" length="10">
+                <comment>&#213;&#253;&#200;&#183;&#209;&#161;&#207;&#238;</comment>
+            </column>
+        </property>
+        <property name="analysis" type="string">
+            <column name="ANALYSIS" length="500">
+                <comment>&#189;&#226;&#206;&#246;</comment>
+            </column>
+        </property>
+        <property name="subjectname" type="string">
+            <column name="SUBJECTNAME" length="10">
+            </column>
+        </property>
+        <property name="testname" type="string">
+            <column name="TESTNAME" length="100">
+            </column>
+        </property>
+        <property name="titlename" type="string">
+            <column name="TITLENAME" length="100" not-null="true">
+                <comment>&#204;&#226;&#196;&#191;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="a" type="string">
+            <column name="A" length="50" />
+        </property>
+        <property name="b" type="string">
+            <column name="B" length="50" />
+        </property>
+        <property name="c" type="string">
+            <column name="C" length="50" />
+        </property>
+        <property name="d" type="string">
+            <column name="D" length="50" />
+        </property>
+        <property name="savetime" type="date" update="false">
+            <column name="SAVETIME" length="7" not-null="true" />
+        </property>
+        <set name="tbComments" table="TB_COMMENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TITLEID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.gwytest.entity.TbComment" />
+        </set>
+        <set name="tbUsertitles" table="TB_USERTITLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TITLEID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.gwytest.entity.TbUsertitle" />
+        </set>
+    </class>
+</hibernate-mapping>
